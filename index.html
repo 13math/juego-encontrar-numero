@@ -24,7 +24,7 @@
         input[type="number"] {
             font-size: 20px;
             padding: 10px;
-            width: 100%;
+            width: 90%;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -45,7 +45,7 @@
             font-size: 1.8em;
             margin-top: 10px;
         }
-        .score, .attempts {
+        .attempts {
             font-size: 1.2em;
             margin-top: 10px;
         }
@@ -55,7 +55,6 @@
     <h1>Adivina el Número</h1>
     <p>¡Intenta adivinar el número secreto entre 1 y 100!</p>
     <div class="game-container">
-        <p class="score" id="score">Puntaje: 0</p>
         <p class="attempts" id="attempts">Intentos restantes: 10</p>
         <input type="number" id="guess" placeholder="Ingresa tu número">
         <button onclick="checkGuess()">Adivinar</button>
@@ -65,10 +64,8 @@
     <script>
         let secretNumber = Math.floor(Math.random() * 100) + 1;
         let attemptsLeft = 10;
-        let score = 0;
 
         const feedbackElement = document.getElementById('feedback');
-        const scoreElement = document.getElementById('score');
         const attemptsElement = document.getElementById('attempts');
 
         function checkGuess() {
@@ -84,8 +81,7 @@
             attemptsElement.textContent = `Intentos restantes: ${attemptsLeft}`;
 
             if (guess === secretNumber) {
-                score += attemptsLeft * 10;
-                feedbackElement.textContent = `¡Correcto! 🎉 El número era ${secretNumber}. Tu puntaje es ${score}.`;
+                feedbackElement.textContent = `¡Correcto! 🎉 El número era ${secretNumber}.`;
                 feedbackElement.style.color = 'green';
                 resetGame();
             } else if (guess > secretNumber) {
@@ -109,9 +105,7 @@
             setTimeout(() => {
                 secretNumber = Math.floor(Math.random() * 100) + 1;
                 attemptsLeft = 10;
-                score = 0;
                 feedbackElement.textContent = '';
-                scoreElement.textContent = `Puntaje: ${score}`;
                 attemptsElement.textContent = `Intentos restantes: ${attemptsLeft}`;
             }, 3000);
         }
